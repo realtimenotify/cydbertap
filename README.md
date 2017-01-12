@@ -102,64 +102,43 @@ Install process on the Pi
 13.  putty’ed in to device to do the following:
 14.  added the following to /etc/rc.local (before “exit 0”)
 
-\# poisontap startup
+            # poisontap startup
+            /bin/sh /home/pi/poisontap/pi\_startup.sh
+            printf "defanged poison tap started up"
+            sleep 5
+            #kick off packet capture
+            printf "Starting Packet Capture Script"
+            /bin/sh /home/pi/capture-packets.sh &
+            printf "Packet Capture should be running"
 
-/bin/sh /home/pi/poisontap/pi\_startup.sh
+15.  added the following to /etc/network/interfaces
 
-printf "defanged poison tap started up"
+             \\nauto usb0\\nallow-hotplug usb0\\niface usb0 inet static\\n\\taddress 1.0.0.1\\n\\tnetmask 0.0.0.0
 
-sleep 5
+16.  added the following to /boot/config.txt
 
-\#kick off packet capture
+             dtoverlay=dwc2
 
-printf "Starting Packet Capture Script"
+17.  added the following to /etc/modules
 
-/bin/sh /home/pi/capture-packets.sh &
+             dwc2\\ng\_ether
 
-printf "Packet Capture should be running"
+18.  created file /home/pi/cydbertap/capture-packets.sh
 
-1.  added the following to /etc/network/interfaces
+            #!/bin/bash
+            count=1
+            while \[ \$count -le 6 \] \# splits 30 minutes across 6 files
+            do
+            if \[ \$count -le 6 \]
+             then
+             FILETIME=\$(date +"%Y%m%d-%H%M%S") #gives date in format YYYYMMDD-HHMMSS
+             FILENAME="PC-"\$FILETIME".pcap" #Sets filename
+             tcpdump -Z root -w \$FILENAME -G 300 -W 1 #Runs TCPDump as root captures 5 mins
+             fi
+             (( count++ ))
+            done
 
- \\nauto usb0\\nallow-hotplug usb0\\niface usb0 inet static\\n\\taddress
-1.0.0.1\\n\\tnetmask 0.0.0.0
-
-1.  added the following to /boot/config.txt
-
- dtoverlay=dwc2
-
-1.  added the following to /etc/modules
-
- dwc2\\ng\_ether
-
-1.  created file /home/pi/cydbertap/capture-packets.sh
-
-\#!/bin/bash
-
-count=1
-
-while \[ \$count -le 6 \] \# splits 30 minutes across 6 files
-
-do
-
- if \[ \$count -le 6 \]
-
- then
-
- FILETIME=\$(date +"%Y%m%d-%H%M%S") \#gives date in format
-YYYYMMDD-HHMMSS
-
- FILENAME="PC-"\$FILETIME".pcap" \#Sets filename
-
- tcpdump -Z root -w \$FILENAME -G 300 -W 1 \#Runs TCPDump as root
-captures 5 mins
-
- fi
-
- (( count++ ))
-
-done
-
-1.  chmod 755 /home/pi/capture-packets.sh
+19.  chmod 755 /home/pi/capture-packets.sh
 
 1.  created file /home/pi/cydbertap/pi\_startup.sh
 
