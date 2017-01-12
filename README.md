@@ -75,34 +75,32 @@ Install process on the Pi
 2.  Booted pi zero (let it do its resize and reboot)
 3.  sudo raspi-config
 
-    a.  option 3 boot options
+        option 3 boot options
+        -   option B1 desktop/cli
+            -   option B2 console autologin
 
--   option B1 desktop/cli
--   option B2 console autologin
+4.  back to main menu & option 7 advanced options
 
-1.  a.  back to main menu & option 7 advanced options
+        -   option A4 enable SSH
+            -   enable SSH
 
--   option A4 enable SSH
--   enable SSH
+5.  back to main menu & option 7 advanced options
 
-1.  a.  back to main menu & option 7 advanced options
+        -   option A3 change memory available to GPU
+            -   set memory to 16 (Not sure if this helps or not and canny find original post)
 
--   option A3 change memory available to GPU
--   set memory to 16 (Not sure if this helps or not and canny find
-    original post)
+6.  back to main menu
 
-1.  a.  back to main menu
+        -   Finish (and reboot)
 
--   Finish (and reboot)
-
-1.  sudo apt-get update
-2.  sudo apt-get upgrade
-3.  sudo apt-get install tcpdump
-4.  sudo apt-get install isc-dhcp-server
-5.  sudo apt-get install dsniff
-6.  sudo apt-get install screen
-7.  putty’ed in to device to do the following:
-8.  added the following to /etc/rc.local (before “exit 0”)
+7.  sudo apt-get update
+8.  sudo apt-get upgrade
+9.  sudo apt-get install tcpdump
+10.  sudo apt-get install isc-dhcp-server
+11.  sudo apt-get install dsniff
+12.  sudo apt-get install screen
+13.  putty’ed in to device to do the following:
+14.  added the following to /etc/rc.local (before “exit 0”)
 
 \# poisontap startup
 
