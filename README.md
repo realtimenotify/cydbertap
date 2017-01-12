@@ -48,20 +48,18 @@ Image Build Process on windows PC:
 ----------------------------------
 
 1.  Use win32diskimager to copy Raspbian Jessie Lite image to Micro SD
-2.  Eject safely and place in pi and boot.
+2.  Eject safely and place in pi zero.
 
 Image Build Process on Linux PC:
 ----------------------------------
 
-1.  mount micros SD card or use lsblk to determine if already mounted (Mine was sdb)
+1.  mount micros SD card or use lsblk to determine if already mounted (Mine was sdb) change following "dd" comand to reflect img and card
 2.  sudo dd if=2016-09-23-raspbian-jessie-lite.img of=/dev/sdb1
-2.  Eject safely and place in pi and boot.
+3.  Eject safely and place in pi zero.
 
 Install process on the Pi
 -------------------------
 
-1.  Using win32diskimager wrote “2016-09-23-raspbian-jessie-lite.img” to
-    a microSD card
 2.  Booted pi zero (let it do its resize and reboot)
 3.  sudo raspi-config
 
