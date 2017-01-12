@@ -1,24 +1,16 @@
 <span id="anchor"></span>CydberTap
 
-The CydberTap is a small cheap solution for forensic analysis based on
-Cider Drinking, Cyber Security and finding something to do with my pi
-zero.
+The CydberTap is a small cheap solution for forensic analysis based on Cider Drinking, Cyber Security and finding something to do with my pi zero.
 
-The Goal is to create a small cheap forensic device for network
-defenders whether hobiests or proffesional.
+The Goal is to create a small cheap forensic device for network defenders whether hobiests or proffesional.
 
 Aims (Currently developing Aim 1 :-)
 
-1: - Create an image for a pi zero that when plugged into a powered on
-(Windows) computer is recognised as a USB eternet device and
-automatically collects 30 minutes of inetwork traffic attempting to
-access the internernet.
+1: - Create an image for a pi zero that when plugged into a powered on (Windows) computer is recognised as a USB eternet device and automatically collects 30 minutes of inetwork traffic attempting to access the internernet.
 
-2: - Automate removal of legitmate network traffic so only interesting
-stuff has to be looked at.
+2: - Automate removal of legitmate network traffic so only interesting stuff has to be looked at.
 
-3: - Automatically perform a Memory capture without relying on
-compromising the computer.
+3: - Automatically perform a Memory capture without relying on compromising the computer.
 
 4: - Automatic capture of logs, events, registry hives, etc.
 
@@ -29,37 +21,28 @@ compromising the computer.
 References and thanks:
 ----------------------
 
--   [Andrew Mulholland
-    gbaman](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a)
+-   [Andrew Mulholland gbaman](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a)
 -   [Samy Kamkar samyk](https://github.com/samyk)
 -   James Woolley [www.jamesdotcom.com](http://www.jamesdotcom.com)
 
 Hardware:
 ---------
 
--   Pi Zero
-    [thepihut.com](https://thepihut.com/collections/raspberry-pi-zero/products/raspberry-pi-zero?variant=14062715972)
--   Micro SD 32GB [(Samsung Micro SD
-    on Amazon)](https://www.amazon.co.uk/gp/product/B00J29BR3Y/)
--   USB hub (micro USB to 3 port) [(3 port Hub
-    on Amazon)](https://www.amazon.co.uk/Acasis-H027-Charging-Simultaneous-Transmisson/dp/B00SZNT0ZU/)
--   Ethernet. (Logic3) [(USB Ethernet adapter
-    on Amazon)](https://www.amazon.co.uk/Logic-3-Ethernet-Adapter-Wii/dp/B002GYVTSU/)
+-   Pi Zero     [thepihut.com](https://thepihut.com/collections/raspberry-pi-zero/products/raspberry-pi-zero?variant=14062715972)
+-   Micro SD 32GB [(Samsung Micro SD on Amazon)](https://www.amazon.co.uk/gp/product/B00J29BR3Y/)
+-   USB hub (micro USB to 3 port) [(3 port Hub on Amazon)](https://www.amazon.co.uk/Acasis-H027-Charging-Simultaneous-Transmisson/dp/B00SZNT0ZU/)
+-   Ethernet. (Logic3) [(USB Ethernet adapter on Amazon)](https://www.amazon.co.uk/Logic-3-Ethernet-Adapter-Wii/dp/B002GYVTSU/)
 -   Keyboard (and mouse)
 -   HDMI Monitor
 
 Software:
 ---------
 
--   Raspbian Jessie lite :
-    <https://www.raspberrypi.org/downloads/raspbian/>
--   *Download cydbertap files from github:
-    *<https://github.com/cydber-seth/cydbertap>* *
+-   Raspbian Jessie lite : <https://www.raspberrypi.org/downloads/raspbian/>
+-   *Download cydbertap files from github: *<https://github.com/cydber-seth/cydbertap>* *
 -   WINSCP (<https://winscp.net/eng/download.php>)
--   Putty
-    (<http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>)
--   Win32disimage
-    (<https://sourceforge.net/projects/win32diskimager/files/latest/download>)
+-   Putty (<http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>)
+-   Win32disimage (<https://sourceforge.net/projects/win32diskimager/files/latest/download>)
 
 Image Build Process on windows PC:
 ----------------------------------
@@ -103,12 +86,12 @@ Install process on the Pi
 14.  added the following to /etc/rc.local (before “exit 0”)
 
             # poisontap startup
-            /bin/sh /home/pi/poisontap/pi_startup.sh
+            /bin/sh /home/pi/cydbertap/pi_startup.sh
             printf "defanged poison tap started up"
             sleep 5
             #kick off packet capture
             printf "Starting Packet Capture Script"
-            /bin/sh /home/pi/capture-packets.sh &
+            /bin/sh /home/pi/cydbertap/capture-packets.sh &
             printf "Packet Capture should be running"
 
 15.  added the following to /etc/network/interfaces
@@ -126,6 +109,7 @@ Install process on the Pi
 18.  created file /home/pi/cydbertap/capture-packets.sh
 
             #!/bin/bash
+            cd /home/pi/cydbertap
             count=1
             while [ $count -le 6 ] # splits 30 minutes across 6 files
             do
@@ -138,7 +122,7 @@ Install process on the Pi
              (( count++ ))
             done
 
-19.  chmod 755 /home/pi/capture-packets.sh
+19.  chmod 755 /home/pi/cydbertap/capture-packets.sh
 
 1.  created file /home/pi/cydbertap/pi\_startup.sh
 
