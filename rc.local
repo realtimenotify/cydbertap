@@ -21,7 +21,7 @@ fi
 /bin/sh /home/pi/cydbertap/pi_startup.sh
 printf "defanged poison tap started up"
 
-sleep 5
+sleep 30
 
 #kick off packet capture
 printf "Starting Packet Capture Script"
