@@ -3,11 +3,11 @@
 
 The CydberTap is a small cheap solution for forensic analysis based on Cider Drinking, Cyber Security and finding something to do with my pi zero.
 
-The Goal is to create a small cheap forensic device for network defenders whether hobiests or proffesional.
+The Goal is to create a small cheap forensic device for network defenders whether hobiests or professional.
 
 Aims (Currently developing Aim 1 :-)
 
-1: - Create an image for a pi zero that when plugged into a powered on (Windows) computer is recognised as a USB eternet device and automatically collects 30 minutes of inetwork traffic attempting to access the internernet.
+1: - Create an image for a pi zero that when plugged into a powered on (Windows) computer is recognised as a USB eternet device and automatically collects 30 minutes of inetwork traffic attempting to access the internet.
 
 2: - Automate removal of legitmate network traffic so only interesting stuff has to be looked at.
 
